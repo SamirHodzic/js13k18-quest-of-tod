@@ -6,14 +6,16 @@ fs.unlinkSync('./dist/style.css')
 
 let output = fs.createWriteStream('./dist/build.zip')
 let archive = archiver('zip', {
-  zlib: { level: 9 } // set compression to best
+  zlib: {
+    level: 9
+  } // set compression to best
 })
 
-output.on('close', function() {
+output.on('close', function () {
   console.log(archive.pointer() + '/13312 total bytes');
 });
 
-archive.on('warning', function(err) {
+archive.on('warning', function (err) {
   if (err.code === 'ENOENT') {
     console.warn(err)
   } else {
@@ -21,7 +23,7 @@ archive.on('warning', function(err) {
   }
 });
 
-archive.on('error', function(err) {
+archive.on('error', function (err) {
   throw err;
 });
 
